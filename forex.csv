@@ -1048,32 +1048,3 @@
 174456092;2023.10.23 10:05:35;buy;0.05;audchf#;0.56365;0.56376;0.00000;2023.10.23 15:56:34;0.56375;0.00;0.00;0.00;0.53
 174457648;2023.10.23 10:57:08;sell;0.05;eurgbp#;0.87077;0.87062;0.00000;2023.10.23 17:25:21;0.87062;0.00;0.00;0.00;0.86
 174455358;2023.10.23 09:40:31;buy;0.05;audchf#;0.56497;0.56497;0.00000;2023.10.23 18:17:04;0.56497;0.00;0.00;0.00;0.00
-;;;;;;;;;;0.00;0.00;-17.94;-1 254.48
-Closed P/L:;;;;;;;;;;;;-1 272.42;
-Open Trades:;;;;;;;;;;;;;
-Ticket;Open Time;Type;Size;Item;Price;S / L;T / P;;Price;Commission;Taxes;Swap;Profit
-No transactions;;;;;;;;;;;;;
-;;;;;;;;;;0.00;0.00;0.00;0.00
-;;;;;;;;;;Floating P/L:;;0.00;
-Working Orders:;;;;;;;;;;;;;
-Ticket;Open Time;Type;Size;Item;Price;S / L;T / P;Market Price;;;;;
-No transactions;;;;;;;;;;;;;
-;;;;;;;;;;;;;
-Summary:;;;;;;;;;;;;;
-Deposit/Withdrawal:;;10 000.00;;Credit Facility:;;;;0.00;;;;;
-Closed Trade P/L:;;-1 272.42;;Floating P/L:;;;;0.00;Margin:;;;0.00;
-Balance:;;8 727.58;;Equity:;;;;8 727.58;Free Margin:;;;8 727.58;
-;;;;;;;;;;;;;
-Details:;;;;;;;;;;;;;
-;;;;;;;;;;;;;
-Gross Profit:;;3 490.98;;Gross Loss:;;;;4 763.40;Total Net Profit:;;;-1 272.42;
-Profit Factor:;;0.73;;Expected Payoff:;;;;-1.22;;;;;
-Absolute Drawdown:;;1 404.42;;Maximal Drawdown:;;;;1 476.92 (14.66%);Relative Drawdown:;;;14.66% (1 476.92);
-;;;;;;;;;;;;;
-Total Trades:;;1047;;Short Positions (won %):;;;;561 (69.34%);Long Positions (won %):;;;486 (72.63%);
-Profit Trades (% of total):;;;;;;;;742 (70.87%);Loss trades (% of total):;;;305 (29.13%);
-Largest;;profit trade:;;;;;;140.28;loss trade:;;;-250.19;
-Average;;profit trade:;;;;;;4.70;loss trade:;;;-15.62;
-Maximum;;consecutive wins ($):;;;;;;52 (68.50);consecutive losses ($):;;;24 (-32.41);
-Maximal;;consecutive profit (count):;;;;;;275.45 (42);consecutive loss (count):;;;-625.34 (7);
-Average;;consecutive wins:;;;;;;5;consecutive losses:;;;2;
