@@ -9,8 +9,8 @@ class RatingsBreakdown(MRJob):
         ]
 
     def mapper_get_ratings(self, _, line):
-        (forex.ticket,forex.opentime,forex.type,forex.size,forex.item,forex.priceopen,forex.sl,forex.tp,forex.closetime,forex.priceclose,forex.commission,forex.taxes,forex.swap,forex.profit) = line.split(',')
-        yield forex.item, 1
+        (ticket,opentime,type,size,item,priceopen,sl,tp,closetime,priceclose,commission,taxes,swap,profit) = line.split(',')
+        yield item, 1
 
     def reducer_count_ratings(self, key, values):
         yield key, sum(values)
