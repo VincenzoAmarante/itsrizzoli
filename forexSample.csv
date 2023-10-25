@@ -1,4 +1,4 @@
-forex.ticket,forex.opentime,forex.type,forex.size,forex.item,forex.priceopen,forex.sl,forex.tp,forex.closetime,forex.priceclose,forex.commission,forex.taxes,forex.swap,forex.profit
+ticket,opentime,type,size,item,priceopen,sl,tp,closetime,priceclose,commission,taxes,swap,profit
 172665018,2023.08.07 09:57:12,buy,1.0,gbpusd#,127.215,127.29,127.7,2023.08.07 11:32:12,127.29,0.0,0.0,0.0,68.31
 172664924,2023.08.07 09:48:59,buy,0.02,eurusd#,109.774,109.6,110.0,2023.08.07 14:20:57,109.778,0.0,0.0,0.0,0.07
 172677195,2023.08.07 16:50:33,sell,0.02,eurusd#,109.966,109.968,109.7,2023.08.07 17:14:06,109.97,0.0,0.0,0.0,-0.07
