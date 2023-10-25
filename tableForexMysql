@@ -1,0 +1,16 @@
+create table forex(
+Ticket          int
+,OpenTime		varchar(25)	
+,Type           varchar(25)
+,Size           double 
+,Item           varchar(25)
+,Price          double
+,SL             double
+,TP             double
+,CloseTime      varchar(25) 
+,Price          double
+,Commission     varchar(25)
+,Taxes          double
+,Swap           vdouble
+,Profit         double
+);
