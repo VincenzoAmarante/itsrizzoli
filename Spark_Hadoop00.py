@@ -29,6 +29,7 @@ output.createOrReplaceTempView("peoples")
 spark.sql("select userID, name from peoples where friends > 100 order by userID").show()
 
 output.write\
-.format("csv").mode("overwrite")\
+.format("json").mode("overwrite")\
 .option("path", "hdfs:///user/maria_dev/spark/job_output/")\
+.partitionBy("age")\
 .save()
