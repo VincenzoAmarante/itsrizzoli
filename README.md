@@ -1,2 +1,0 @@
-# itsrizzoli
-bigDataCourse
