@@ -1,0 +1,134 @@
+verifica 18/12/2023
+
+[maria_dev@sandbox-hdp ~]$ wget https://raw.githubusercontent.com/VincenzoAmarante/itsrizzoli/verifica/forexDicembre2023.csv
+[maria_dev@sandbox-hdp ~]$ wget https://raw.githubusercontent.com/VincenzoAmarante/itsrizzoli/verifica/forexNovembre2023.csv
+[maria_dev@sandbox-hdp ~]$ wget https://raw.githubusercontent.com/VincenzoAmarante/itsrizzoli/verifica/forexOttobre2023.csv
+
+[maria_dev@sandbox-hdp ~]$ mkdir forexAnalisis
+[maria_dev@sandbox-hdp ~]$ ls forexAnalisis/
+[maria_dev@sandbox-hdp ~]$ cp forex*.csv forexAnalisis/
+[maria_dev@sandbox-hdp ~]$ ls forexAnalisis/
+
+hive> create table stgforex(Ticket string, OpenTime string,TypeOpe string,SizeOpe string,Currency string,PriceOpen string,SotpLoss string,TakePofit string,CloseTime string,PriceClose string,Commission string,Taxes string,Sw string,Profit string)ROW FORMAT DELIMITED FIELDS TERMINATED BY '\u003B' LINES TERMINATED BY '\n' STORED AS TEXTFILE;
+
+hive> ALTER TABLE stgforex SET TBLPROPERTIES("skip.header.line.count"="1");
+
+hive> LOAD DATA LOCAL INPATH '/home/maria_dev/forexDicembre2023.csv' OVERWRITE INTO TABLE stgforex;
+
+hive> select * from stgforex;
+
+hive> select count(*) from stgforex;  -->19
+
+hive> ALTER TABLE stgforex SET TBLPROPERTIES("skip.header.line.count"="1");
+
+hive> LOAD DATA LOCAL INPATH '/home/maria_dev/forexNovembre2023.csv' OVERWRITE INTO TABLE stgforex;
+
+hive> select count(*) from stgforex;  -->204
+
+hive> LOAD DATA LOCAL INPATH '/home/maria_dev/forexOttobre2023.csv' OVERWRITE INTO TABLE stgforex;
+
+hive> select count(*) from stgforex;  -->226
+
+
+[maria_dev@sandbox-hdp ~]$ vi etlForex.sh
+#!/bin/bash
+
+for var in forexAnalisis/*.csv;
+do
+        hive --hiveconf file=${var} -f run.sql ;
+done
+
+[maria_dev@sandbox-hdp ~]$ chmod +x etlForex.sh
+
+
+[maria_dev@sandbox-hdp ~]$ vi runSqlForex.sql
+ALTER TABLE stgforex SET TBLPROPERTIES ("skip.header.line.count"="1");
+LOAD DATA LOCAL INPATH '/home/maria_dev/${hiveconf:file}' OVERWRITE INTO TABLE stgforex;
+
+DROP TABLE wrkforex
+
+CREATE TABLE wrkforex(
+ticket INT
+,opentime DATE
+,typeope STRING
+,sizeope DOUBLE
+,currency STRING
+,priceopen DOUBLE
+,sotploss DOUBLE
+,takepofit DOUBLE
+,closetime DATE
+,priceclose DOUBLE
+,commission DOUBLE
+,taxes DOUBLE
+,sw DOUBLE
+,profit DOUBLE
+);
+
+INSERT INTO WRKFOREX 
+select
+CAST(ticket AS INT)
+,CAST(from_unixtime(unix_timestamp(SUBSTRING(opentime, 0, 10), 'yyyy.MM.dd'), 'yyyy-MM-dd') AS DATE) AS opentime
+,typeope
+,CAST(sizeope AS DOUBLE)
+,currency
+,CAST(priceopen AS DOUBLE)
+,CAST(sotploss AS DOUBLE)
+,CAST(takepofit AS DOUBLE)
+,CAST(from_unixtime(unix_timestamp(SUBSTRING(closetime, 0, 10), 'yyyy.MM.dd'), 'yyyy-MM-dd') AS DATE) AS closetime
+,CAST(priceclose AS DOUBLE)
+,CAST(commission AS DOUBLE)
+,CAST(taxes AS DOUBLE)
+,CAST(sw AS DOUBLE)
+,CAST(profit AS DOUBLE)
+from stgforex
+
+truncate table stgforex;
+truncate table wrkforex;
+
+19 Dicembre
+187 Novembre
+23 Ottobre
+
+227 - header(3)
+
+select 
+currency, count(*) 
+from wrkforex
+group by currency;
+
+select 
+currency, opentime, closetime, count(*) 
+from wrkforex
+group by 
+currency, opentime, closetime;
+
+SELECT
+  DATE_FORMAT(opentime, 'yyyy-MM') AS mese,
+  COUNT(*) AS conteggio
+FROM
+  wrkforex
+WHERE
+  opentime IS NOT NULL
+GROUP BY
+  DATE_FORMAT(opentime, 'yyyy-MM');
+  
+SELECT
+  DATE_FORMAT(opentime, 'yyyy-MM') AS mese, currency, typeope, sum(profit) as profit,
+  COUNT(*) AS conteggio
+FROM
+  wrkforex
+WHERE
+  opentime IS NOT NULL
+GROUP BY
+  DATE_FORMAT(opentime, 'yyyy-MM')
+,currency, typeope;  
+
+SELECT
+  DATE_FORMAT(opentime, 'yyyy-MM') AS mese, sum(profit) as profit,
+  COUNT(*) AS conteggio
+FROM
+  wrkforex
+WHERE
+  opentime IS NOT NULL
+GROUP BY
+  DATE_FORMAT(opentime, 'yyyy-MM');
